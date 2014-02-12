@@ -26,7 +26,23 @@ function addProjectDetails(e) {
 	// get rid of 'project' from the front of the id 'project3'
 	var idNumber = projectID.substr('project'.length);
 
+	var url = '/project/' + idNumber;
+	console.log(url);
+	$.get(url, appendProjectInfo);
+
+	// $.get('http://ws.spotify.com/search/1/track.json?q=kaizers+orchestra', function (result) {
+	// 	console.log(result);
+	// }, 'jsonp');
+
 	console.log("User clicked on project " + idNumber);
+}
+
+function appendProjectInfo(result) {
+	var html = '';
+	html += '<div class="project_header">' + result.date + '</div>';
+	html += '<div><img class="detailsImage" src="' + result.image + '"></div>';
+	html += '<div>' + result.summary + '</div>';
+	$('#project' + result.id + ' .details').html(html);
 }
 
 /*
